@@ -8,29 +8,30 @@ import com.google.gson.annotations.SerializedName;
 
 public class Country {
 
-    String code;
-
-    @SerializedName("dial_code")
-    String dialCode;
-
     String name;
 
+    @SerializedName("country_code")
+    String countryCode;
+
+    @SerializedName("phone_code")
+    String phoneCode;
+
     public Country(String code, String dialCode, String name) {
-        this.code = code;
-        this.dialCode = dialCode;
+        this.countryCode = code;
+        this.phoneCode = dialCode;
         this.name = name;
     }
 
-    public String code() {
-        return code;
-    }
-
-    public String dialCode() {
-        return dialCode;
-    }
-
-    public String name() {
+    public String getName() {
         return name;
+    }
+
+    public String getCountryCode() {
+        return countryCode;
+    }
+
+    public String getPhoneCode() {
+        return phoneCode;
     }
 
     @Override
@@ -40,15 +41,15 @@ public class Country {
 
         Country country = (Country) o;
 
-        if (!code.equals(country.code)) return false;
-        if (!dialCode.equals(country.dialCode)) return false;
+        if (!countryCode.equals(country.countryCode)) return false;
+        if (!phoneCode.equals(country.phoneCode)) return false;
         return name.equals(country.name);
     }
 
     @Override
     public int hashCode() {
-        int result = code.hashCode();
-        result = 31 * result + dialCode.hashCode();
+        int result = countryCode.hashCode();
+        result = 31 * result + phoneCode.hashCode();
         result = 31 * result + name.hashCode();
         return result;
     }
@@ -56,8 +57,8 @@ public class Country {
     @Override
     public String toString() {
         return "Country{" +
-                "code='" + code + '\'' +
-                ", dialCode='" + dialCode + '\'' +
+                "countryCode='" + countryCode + '\'' +
+                ", phoneCode='" + phoneCode + '\'' +
                 ", name='" + name + '\'' +
                 '}';
     }
