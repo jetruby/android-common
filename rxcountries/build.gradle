@@ -6,7 +6,7 @@ group = 'com.jetruby.android.common'
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "io.reactivex.rxjava2:rxjava:$rootProject.ext.rxjava2Version"
-    implementation "com.google.code.gson:gson:$rootProject.ext.gsonVersion"
+    implementation "com.fasterxml.jackson.core:jackson-core:$rootProject.ext.jacksonCoreVersion"
 }
 
 task sourcesJar(type: Jar, dependsOn: classes) {

@@ -1,7 +1,5 @@
 package com.jetruby.common.rxcountries;
 
-import com.google.gson.annotations.SerializedName;
-
 /**
  * Created by anton_azaryan on 2/12/18.
  */
@@ -9,12 +7,11 @@ import com.google.gson.annotations.SerializedName;
 public class Country {
 
     String name;
-
-    @SerializedName("country_code")
     String countryCode;
-
-    @SerializedName("phone_code")
     String phoneCode;
+
+    Country() {
+    }
 
     public Country(String code, String dialCode, String name) {
         this.countryCode = code;

@@ -1,7 +1,6 @@
 package com.jetruby.common.rxcountries;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import com.fasterxml.jackson.core.JsonFactory;
 
 import java.io.InputStreamReader;
 import java.util.List;
@@ -17,17 +16,8 @@ public class RxCountries {
         return Single.just("/countries.json")
                 .map(RxCountries.class::getResourceAsStream)
                 .map(InputStreamReader::new)
-                .map(reader -> new Gson().fromJson(reader, new TypeToken<List<Country>>() {
-                }.getType()));
+                .map(reader -> new CountryJsonMapper()
+                        .parseList(new JsonFactory().createParser(reader)));
     }
-
-//    public static Observable<List<Country>> search(Observable<String> searchStream) {
-//        Single<List<Country>> countryStream = countryList().cache();
-//        return searchStream.switchMap(s -> countryStream.flatMapObservable(countries ->
-//                Observable.fromIterable(countries)
-//                        .filter(country -> country.name().startsWith(s))
-//                        .toList()
-//                        .toObservable()));
-//    }
 
 }
