@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.JsonFactory;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.ref.WeakReference;
+import java.util.Collections;
 import java.util.List;
 
 import io.reactivex.Flowable;
@@ -46,8 +47,10 @@ public class RxCountries {
                 InputStreamReader reader = new InputStreamReader(
                         RxCountries.class.getResourceAsStream("/countries.json"));
 
-                countries = new WeakReference<>(new CountryJsonMapper()
-                        .parseList(new JsonFactory().createParser(reader)));
+                List<Country> immutable = Collections.unmodifiableList(new CountryJsonMapper()
+                                .parseList(new JsonFactory().createParser(reader)));
+
+                countries = new WeakReference<>(immutable);
             }
         }
         return countries.get();

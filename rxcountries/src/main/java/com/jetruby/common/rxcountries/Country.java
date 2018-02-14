@@ -1,14 +1,44 @@
 package com.jetruby.common.rxcountries;
 
+import java.util.Comparator;
+
 /**
  * Created by anton_azaryan on 2/12/18.
  */
 
-public class Country {
+public class Country implements Comparable<Country> {
 
     String name;
     String countryCode;
     String phoneCode;
+
+    public static Country clone(Country from) {
+        Country newCountry = new Country();
+        newCountry.name = from.name;
+        newCountry.countryCode = from.countryCode;
+        newCountry.phoneCode = from.phoneCode;
+        return newCountry;
+    }
+
+    public static Country china() {
+        Country newCountry = new Country();
+        newCountry.name = "China";
+        newCountry.countryCode = "CN";
+        newCountry.phoneCode = "86";
+        return newCountry;
+    }
+
+    public static Country usa() {
+        Country newCountry = new Country();
+        newCountry.name = "United States";
+        newCountry.countryCode = "US";
+        newCountry.phoneCode = "1";
+        return newCountry;
+    }
+
+    public static Comparator<Country> countryCodeComparator() {
+        return (c1, c2) -> c1.getCountryCode().compareTo(c2.getCountryCode());
+    }
 
     Country() {
     }
@@ -58,5 +88,10 @@ public class Country {
                 ", phoneCode='" + phoneCode + '\'' +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Country country) {
+        return name.compareTo(country.getName());
     }
 }
