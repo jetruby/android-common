@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonFactory;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Collections;
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 import io.reactivex.Flowable;
@@ -13,7 +13,19 @@ import io.reactivex.Single;
 
 public class RxCountries {
 
+    private static WeakReference<List<Country>> countries;
+
     private RxCountries() {
+    }
+
+    public static Observable<Country> countryObservable() {
+        return countryListObservable()
+                .flatMap(Observable::fromIterable);
+    }
+
+    public static Flowable<Country> countryFlowable() {
+        return countryListFlowable()
+                .flatMap(Flowable::fromIterable);
     }
 
     public static Single<List<Country>> countryListSingle() {
@@ -28,15 +40,17 @@ public class RxCountries {
         return Flowable.fromCallable(RxCountries::countryList);
     }
 
-    public static List<Country> countryList() {
-        InputStreamReader reader = new InputStreamReader(
-                RxCountries.class.getResourceAsStream("/countries.json"));
-        try {
-            return new CountryJsonMapper()
-                    .parseList(new JsonFactory().createParser(reader));
-        } catch (IOException e) {
-            return Collections.emptyList();
+    public static List<Country> countryList() throws IOException {
+        synchronized (RxCountries.class) {
+            if (countries == null || countries.get() == null) {
+                InputStreamReader reader = new InputStreamReader(
+                        RxCountries.class.getResourceAsStream("/countries.json"));
+
+                countries = new WeakReference<>(new CountryJsonMapper()
+                        .parseList(new JsonFactory().createParser(reader)));
+            }
         }
+        return countries.get();
     }
 
 }

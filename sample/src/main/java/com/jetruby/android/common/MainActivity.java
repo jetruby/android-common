@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
                 .subscribeOn(Schedulers.io())
                 .subscribe(s -> Log.d("AZA", s));
 
-
         RxCountries.countryListSingle()
                 .flatMapObservable(Observable::fromIterable)
                 .subscribeOn(Schedulers.io())
