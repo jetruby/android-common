@@ -1,5 +1,7 @@
 apply plugin: 'com.android.library'
 
+group = 'com.jetruby.android.common.flagsres'
+
 android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
