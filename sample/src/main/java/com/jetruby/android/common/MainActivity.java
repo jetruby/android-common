@@ -1,12 +1,12 @@
 package com.jetruby.android.common;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.jetruby.common.rxcountries.Country;
 import com.jetruby.common.rxcountries.RxCountries;
+import com.jetruby.flagsres.FlagAssets;
 
 import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
@@ -18,35 +18,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        RxCountries.countryList()
+        RxCountries.countryListSingle()
                 .flatMapObservable(Observable::fromIterable)
                 .map(Country::toString)
                 .subscribeOn(Schedulers.io())
                 .subscribe(s -> Log.d("AZA", s));
 
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                RxCountries.countryList()
-                        .flatMapObservable(Observable::fromIterable)
-                        .map(Country::toString)
-                        .subscribeOn(Schedulers.io())
-                        .subscribe(s -> Log.d("AZA", s));
-            }
-        }, 3000);
+        RxCountries.countryListSingle()
+                .flatMapObservable(Observable::fromIterable)
+                .subscribeOn(Schedulers.io())
+                .subscribe(country -> {
+                    Log.d("AZA", country.getCountryCode());
+                    Log.d("AZA", "id:" + FlagAssets.getFlagResIdByCountryCode(MainActivity.this, country.getCountryCode()));
+                });
 
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                RxCountries.countryList()
-                        .flatMapObservable(Observable::fromIterable)
-                        .map(Country::toString)
-                        .subscribeOn(Schedulers.io())
-                        .subscribe(s -> Log.d("AZA", s));
-            }
-        }, 6000);
     }
 
 }
