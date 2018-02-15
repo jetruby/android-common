@@ -1,1 +1,1 @@
-include ':sample', ':rxcountries', ':flagsres'
+include ':rxcountries', ':flagsres'
