@@ -3,8 +3,6 @@ package com.jetruby.flagsres;
 import android.content.Context;
 import android.content.res.Resources;
 
-import com.jetruby.common.rxcountries.Country;
-
 /**
  * Created by anton_azaryan on 2/14/18.
  */
@@ -12,10 +10,6 @@ import com.jetruby.common.rxcountries.Country;
 public class FlagAssets {
 
     private FlagAssets() {
-    }
-
-    public static int getFlagResIdByCountry(Context context, Country country) {
-        return getFlagResIdByCountryCode(context, country.getCountryCode());
     }
 
     public static int getFlagResIdByCountryCode(Context context, String countryCode) {
