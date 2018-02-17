@@ -1,4 +1,4 @@
-package com.jetruby.common.rxcountries;
+package com.jetruby.common.countries;
 
 import java.util.Comparator;
 

@@ -17,20 +17,20 @@ allprojects {
 
 #### PROJECT MODULES:
 
-#### :rxcountries
+#### :countries
  - api to request countries list with common methods
  
  ```gradle
  dependencies {
-     implementation 'com.github.jetruby.android-common:rxcountries:{last_version}'
+     implementation 'com.github.jetruby.android-common:countries:{last_version}'
  }
  ```
  
-#### :flagsres
+#### :flagassets
 - lib with flags image assets and common get methods
 
 ```gradle
 dependencies {
-    implementation 'com.github.jetruby.android-common:flagsres:{last_version}'
+    implementation 'com.github.jetruby.android-common:flagassets:{last_version}'
 }
 ```

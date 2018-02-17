@@ -1,1 +1,1 @@
-include ':rxcountries', ':flagsres'
+include ':countries', ':flagassets'
