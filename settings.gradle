@@ -1,1 +1,1 @@
-include ':countries', ':flagassets'
+include ':countries', ':flagassets', ':simple-mapper-processor', ':simple-mapper'
