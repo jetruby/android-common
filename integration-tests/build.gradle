@@ -1,10 +1,10 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'com.github.dcendents.android-maven'
-
-group = 'com.github.jetruby'
 
 dependencies {
+    implementation project(":flag-assets")
+    implementation project(":countries")
+
     implementation Deps.kotlinStdlib
     testImplementation Deps.jUnit
     androidTestImplementation Deps.androidJUnit
@@ -22,21 +22,8 @@ android {
         testInstrumentationRunner General.TestInstrumentationRunner
     }
 
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
-
     compileOptions {
         sourceCompatibility General.sourceCompatibility
         targetCompatibility General.targetCompatibility
     }
-}
-
-// build a jar with source files
-task sourcesJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    classifier = 'sources'
 }

@@ -1,1 +1,2 @@
-include ':countries', ':flag-assets', ':mapper-factory-processor', ':mapper-factory'
+include ':countries', ':flag-assets', ':mapper-factory-processor', ':mapper-factory',
+        ':integration-tests'
